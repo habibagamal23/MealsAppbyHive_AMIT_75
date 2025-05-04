@@ -1,0 +1,96 @@
+import 'package:flutter/material.dart';
+import 'package:mealsbyhive/db/hiveHelper.dart';
+import 'package:mealsbyhive/models/mealsModel.dart';
+
+import 'AddScreen.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  List<MealsModel> mymeals = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getMeals();
+  }
+
+  getMeals() async {
+    final meals = await HiveHelper.getAllmeals();
+    setState(() {
+      mymeals = meals;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(children: [
+        Text("Home"),
+        Expanded(
+          child: GridView.builder(
+              itemCount: mymeals.length,
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              itemBuilder: (context, index) {
+                return InkWell(
+
+                  /*
+                  [
+                  Meal(1, burger , deis),
+                  mylist[0]
+                  Meal(2, burger , deis),
+                  mylist[1]
+                  Meal(3, burger , deis),
+                  Meal(4, burger , deis),
+                  ]
+                */
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> Detailes(meal: mymeals[index])));
+                  },
+                  child: Card(
+                    color: Colors.black12,
+                    elevation: 2,
+                    child: Column(
+                      children: [
+                        Text("${mymeals[index].name}"),
+                        Text("${mymeals[index].description}")
+                      ],
+                    ),
+                  ),
+                );
+              }),
+        )
+      ]),
+      floatingActionButton: FloatingActionButton(
+        onPressed: ()async  {
+          await Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Addscreen()));
+       getMeals();
+        },
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+
+class Detailes extends StatelessWidget {
+ final  MealsModel meal;
+  const Detailes({super.key ,required this.meal});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(meal.name),
+      ),
+    );
+  }
+}
