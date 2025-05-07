@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mealsbyhive/db/hiveHelper.dart';
 import 'package:mealsbyhive/models/mealsModel.dart';
+import 'package:mealsbyhive/service/getit_helper.dart';
 
 class Addscreen extends StatelessWidget {
   const Addscreen({super.key});
@@ -33,9 +34,10 @@ class Addscreen extends StatelessWidget {
           ),
           ElevatedButton(
               onPressed: () async {
-                MealsModel meal = MealsModel(HiveHelper.length + 1,
+                MealsModel meal = MealsModel(getit<HiveHelper>().length + 1,
                     mealNameController.text, "image", price.text, dis.text);
-                await HiveHelper.addMeal(meal);
+                await getit<HiveHelper>().addMeal(meal);
+                // 2 object
                 print("meal added");
                 Navigator.pop(context);
               },

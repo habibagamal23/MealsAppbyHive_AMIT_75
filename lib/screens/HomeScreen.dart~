@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mealsbyhive/db/hiveHelper.dart';
 import 'package:mealsbyhive/models/mealsModel.dart';
-import 'package:mealsbyhive/service/getit_helper.dart';
 
 import 'AddScreen.dart';
 
@@ -23,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   getMeals() async {
-    final meals = await getit<HiveHelper>().getAllmeals();
+    final meals = await HiveHelper.getAllmeals();
     // 3 object
     setState(() {
       mymeals = meals;
