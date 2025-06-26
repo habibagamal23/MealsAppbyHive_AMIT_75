@@ -1,12 +1,13 @@
-# mealsbyhive
 
-A new Flutter project by hive database offline .
+
+**MealsByHive** is a Flutter-based food app designed with clean architecture and optimized for speed, offline access, and scalability. It uses **Hive** for local data storage, ensuring a smooth experience even without internet. Perfect for browsing meals, planning your diet, or discovering recipes.
 
 ## Getting Started
 
-![image](https://github.com/user-attachments/assets/8ff13dee-6e88-4ec6-be04-7d50b31d5f07)
+https://github.com/user-attachments/assets/00a05d8e-3a7c-4bae-99d2-8c1afb0fbad0
 
-![image](https://github.com/user-attachments/assets/ed1c9eb9-0868-43c5-b406-46422f0867e9)
+
+
 
 
 A few resources to get you started if this is your first Flutter project:
